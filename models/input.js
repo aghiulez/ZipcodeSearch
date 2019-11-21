@@ -1,6 +1,7 @@
 const InputModel = orango => {
     const schema = new orango.Schema({
-        zipcode: {type: String, required: true}
+        zipcode: {type: String, required: true},
+        timestamp: {type: Date, default: Date.now }
     });
     const Input = orango.model('Input', schema);
     Input.add = async ({zipcode}) => {
