@@ -32,8 +32,8 @@ class ZipcodeSearchServer{
           
             } else {  
               response.write(`<h1>If you would like to know what city a zipcode belongs to, </h1>`);
-              response.write(`<h1>query: /?zipcode=<ZIPCODE>    -- to the URL (for get method)</h1>`);
-              //response.write('<form class="example" method="post" action="action_page.html">');
+              response.write(`<h1>query: /?zipcode=<ZIPCODE>    -- to the URL (for get method)</h1>`); 
+              //response.write('<form class="example" method="post" action="action_page.html">'); // i dont really need it to forward somewhere
               response.write('<form class="example" method="post" >');
               response.write('  <input type="text" placeholder="Search Zipcode" name="zipcode">');
               response.write('  <button type="submit"><i class="fa fa-search"></i></button>');
