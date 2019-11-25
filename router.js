@@ -1,45 +1,43 @@
 const cities = require("cities");
 const {parse} = require("url");
 const InputController = require("./controllers/inputController");
+const express = require('express');
 
 
-class Router {
-  constructor() {
-    this.routes = [];
-  }
-  //A router object allows new handlers to be registered with the add method
-  add(method, url, handler) {
-    this.routes.push({method, url, handler});
-  }
-  //A router object can resolve requests with its resolve method.
-  // context -> server instance 
-  resolve(context, request) {  // Resolve : resolve the current request 
-    let path = parse(request.url).path;
-    for (let {method, url, handler} of this.routes) {
-      let match = url.exec(path);
-      if (!match || request.method != method) continue; // if the path is not a match or the request method is not valid, skip this iteration
-      let urlParts = match.slice(1).map(decodeURIComponent);
-      return handler(context, ...urlParts, InputController, request); // -> a promise... return of the add
+module.exports = orango => {
+  const router = express.Router();
+
+  router.use(express.urlencoded());
+  router.use(express.json());
+  
+
+  router.get('/', (request,response) => {
+    try{
+      response.write(`<h1>If you would like to know what city a zipcode belongs to, </h1>`);
+      response.write(`<h1>query: /?zipcode=<ZIPCODE>    -- to the URL (GET)</h1>`); 
+      response.write('<form class="example" method="post" >');
+      response.write('  <input type="text" id = "zipcode" placeholder="Search Zipcode" name="zipcode">');
+      response.write('  <button type="submit"><i class="fa fa-search"></i></button>');
+      response.write('</form>');
+      response.end();
+    }catch(error){
+      console.log(error);
     }
-    return null;
-  }
-};
+  })
 
 
-// Here, we create a Router object --- passing in new handler methods with the add method 
-// -------------------------------------------------------------------------------------------------
-const myRouter = new Router();
 
-myRouter.add("GET", /^\/\?zipcode=(\d\d\d\d\d)$/, async (myServer, urlParts, controller, request) => {
-  if (cities.zip_lookup(urlParts) != null){
-    controller(myServer.orango, urlParts);
-    return {body: 'The zipcode you searched for is in ' + cities.zip_lookup(urlParts).city,
-            headers: {"Content-Type": "text/plain"}};
-  }
-  else{
-    return {body: 'The zipcode you searched for does not exist',
-            headers: {"Content-Type": "text/plain"}};
-  }
-});
+  router.post('/', (request,response) => {
+    console.log(request.body.zipcode);
 
-module.exports = myRouter;
+    InputController(orango,request.body.zipcode);
+    response.send('The zipcode you searched for is in ' + cities.zip_lookup(request.body.zipcode).city)
+   
+  })
+
+
+
+  return router;
+}
+
+

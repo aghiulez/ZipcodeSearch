@@ -2,6 +2,9 @@ const orango = require('orango');
 const {createServer} = require('http');
 const connectArangoDB = require("./connectors/connectArango");
 const Router = require("./router");
+const express = require('express');
+const PORT = 3000;
+
 
 
 
@@ -14,44 +17,39 @@ class ZipcodeSearchServer{
 
         connector(orango);
         this.orango = orango;
-        this.server = createServer((request, response) => {
-            
-            let resolved = Router.resolve(this, request);
-            console.log(request.method);
+        this.server = express(); //Init express?
 
-            if (resolved) {
-              resolved.catch(error => {
-                if (error.status != null) return error;
-                return {body: String(error), status: 500};
-              }).then(({body,
-                        status = 200,
-                        headers = {"Content-Type": "text/plain"}}) => {
-                response.writeHead(status, headers);
-                response.end(body);
-              });
+
+
+
+    }
+    start(port){
+        try{
+            // uncomment to connect to DB
+
           
-            } else {  
-              response.write(`<h1>If you would like to know what city a zipcode belongs to, </h1>`);
-              response.write(`<h1>query: /?zipcode=<ZIPCODE>    -- to the URL (for get method)</h1>`); 
-              //response.write('<form class="example" method="post" action="action_page.html">'); // i dont really need it to forward somewhere
-              response.write('<form class="example" method="post" >');
-              response.write('  <input type="text" placeholder="Search Zipcode" name="zipcode">');
-              response.write('  <button type="submit"><i class="fa fa-search"></i></button>');
-              response.write('</form>');
-            }
+          this.server.use("/", require('./router')(this.orango));
+ 
+
+
+          this.server.listen(PORT, () => console.log(`Server Started on port: ${PORT}`));
+
+        }catch(serverError){
+          console.error({
+            ErrorNotice: 'A major fuckup took place with server startup! ☠️',
+            ErrorPayload: serverError,
           });
         }
-    start(port){
-        this.server.listen(port);
-    }
-      stop(){
-        this.server.close();
-    }
-    
-}
+    };
 
-const myOrango = orango.get("dev"); // orango instance with the instance name "dev" (later looks for DB titled "dev within arango")
-const myServer = new ZipcodeSearchServer(myOrango);
+
+      stop(){
+        //this.server.close();
+    };
+    
+};
+
+const myServer = new ZipcodeSearchServer(orango.get("dev"));
 
 // ----------------------------------------------------------
 
