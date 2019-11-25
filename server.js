@@ -1,5 +1,4 @@
 const orango = require('orango');
-const {createServer} = require('http');
 const connectArangoDB = require("./connectors/connectArango");
 const Router = require("./router");
 const express = require('express');
@@ -16,7 +15,7 @@ const start = (port) => {
     connector(orangoInstance);
     const server = express();
 
-    server.use("/", require('./router')(this.orango));
+    server.use("/", require('./router')(orangoInstance));
     server.listen(port, () => console.log(`Server Started on port: ${PORT}`));
 
   }catch (serverError) {
@@ -26,6 +25,5 @@ const start = (port) => {
     });
   }
 }
-console.log(process.env);
 start(PORT);
 

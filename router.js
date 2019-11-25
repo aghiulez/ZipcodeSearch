@@ -2,7 +2,7 @@ const cities = require("cities");
 const {parse} = require("url");
 const InputController = require("./controllers/inputController");
 const express = require('express');
-
+const path = require("path");
 
 
 module.exports = orango => {
@@ -10,34 +10,19 @@ module.exports = orango => {
 
   router.use(express.urlencoded());
   router.use(express.json());
-  
 
   router.get('/', (request,response) => {
     try{
-      response.write(`<h1>If you would like to know what city a zipcode belongs to, </h1>`);
-      response.write(`<h1>query: /?zipcode=<ZIPCODE>    -- to the URL (GET)</h1>`); 
-      response.write('<form class="example" method="post" >');
-      response.write('  <input type="text" id = "zipcode" placeholder="Search Zipcode" name="zipcode">');
-      response.write('  <button type="submit"><i class="fa fa-search"></i></button>');
-      response.write('</form>');
-      response.end();
+      response.sendFile(path.join(__dirname,'pages','index.html'));
     }catch(error){
       console.log(error);
     }
   })
-
-
-
   router.post('/', (request,response) => {
-    console.log(request.body.zipcode);
-
     InputController(orango,request.body.zipcode);
     response.send('The zipcode you searched for is in ' + cities.zip_lookup(request.body.zipcode).city)
    
   })
-
-
-
   return router;
 }
 
