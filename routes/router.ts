@@ -1,16 +1,12 @@
-const cities = require("cities");
-const {parse} = require("url");
-const InputController = require("./controllers/inputController");
-const express = require('express');
-const path = require("path");
+import * as cities from "cities";
+import * as express from "express";
+import * as path from "path";
 
+import {InputController} from "../controllers/inputController"
 
-module.exports = orango => {
+const Router = (orango: any) => {
   const router = express.Router();
-
-  router.use(express.urlencoded());
-  router.use(express.json());
-
+  router.use(express.urlencoded({extended: true}));
   router.get('/', (request,response) => {
     try{
       response.sendFile(path.join(__dirname,'pages','index.html'));
@@ -21,9 +17,8 @@ module.exports = orango => {
   router.post('/', (request,response) => {
     InputController(orango,request.body.zipcode);
     response.send('The zipcode you searched for is in ' + cities.zip_lookup(request.body.zipcode).city)
-   
   })
   return router;
 }
-
+export{Router}
 

@@ -7,7 +7,7 @@
     "start_dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "tsc",
-    "dev": "ts-node-dev --respawn --transpileOnly main.ts",
+    "dev": "ts-node-dev --respawn server.ts",
     "prod": "tsc && node ./build/main.js"
   },
   "author": "Ara",

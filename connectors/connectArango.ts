@@ -1,9 +1,7 @@
-
-const InputModel = require("../models/input"); 
-
+import {InputModel} from "../models/inputcopy";
 
 
-async function connectArangoDB(orango) {  // async functions return promises!
+async function connectArangoDB(orango: any) {  // async functions return promises!
   try {
 
     // Bind Model to orango instance
@@ -27,4 +25,4 @@ async function connectArangoDB(orango) {  // async functions return promises!
   }
 }
 
-module.exports = connectArangoDB;
+export{connectArangoDB};
