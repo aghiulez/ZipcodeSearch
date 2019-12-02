@@ -1,5 +1,29 @@
-<h1>Input a zipcode below to find out what city it belongs to.</h1>
-<form class="example" method="post" >
-  <input type="text" id = "zipcode" placeholder="Search Zipcode" name="zipcode">
-  <button type="submit"><i class="fa fa-search"></i></button>
-</form>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ZipcodeSearch</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/styles.css"  rel="stylesheet" type="text/css" >
+  </head>
+
+  <body>
+    <div class="topnav">
+      <a class="active" href="#home">Home</a>
+      <a href="#searches">Searches</a>
+      <div class="search-container" >
+        <form method="post">
+          <input type="text" placeholder="Search.." name="zipcode">
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <div style="padding-left:16px" >
+      <h2>Welcome to ZipcodeSearch</h2>
+      <p>Enter a valid zipcode into the search box and submit.</p>
+      <p>Click [Searches] to view search history.</p>
+    </div>
+
+
+  </body>
+</html>

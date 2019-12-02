@@ -17,7 +17,10 @@
     "body-parser": "^1.19.0",
     "cities": "^2.0.0",
     "express": "^4.17.1",
+    "ioredis": "^4.14.1",
     "orango": "^1.0.0-beta-1.1",
+    "redis": "^2.8.0",
+    "redis-commander": "^0.6.6",
     "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.7.2"
   },

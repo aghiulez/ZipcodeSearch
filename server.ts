@@ -1,26 +1,27 @@
-
-import orango from "orango";
 import express from "express";
 
 
 import {Router} from "./routes/router";
 import {connectArangoDB} from "./connectors/connectArango";
-
+import {connectRedisCache} from "./connectors/connectRedis";
+ 
 const PORT: number = 3000;
 
 
-// await is only valid in async functions
-async function connector(orango: any) {return await connectArangoDB(orango);} 
+// USE REDIS AS MIDDLEWARE
 
-
-const start: any = (port: number) => {
+const start: any = async (port: number) => {
   try{
-    const orangoInstance = orango.get("dev");
-    connector(orangoInstance);
+    
+    //makes JavaScript wait until that promise settles
+    const orangoInstance = await connectArangoDB();    // -> orango object
+    const redisInstance  = await connectRedisCache();  // -> redis object
+    
     const server = express();
 
-    server.use("/", Router(orangoInstance));
-    server.listen(port, () => console.log(`Server Started on port: ${PORT}`));
+    server.use("/", Router(orangoInstance, redisInstance));
+
+    server.listen(port, () => console.log(`🚀  Server Started on port: http://localhost:${PORT}`));
 
   }catch (serverError) {
     console.error({

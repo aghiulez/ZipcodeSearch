@@ -1,24 +1,31 @@
-import {InputModel} from "../models/inputcopy";
+import {InputModel} from "../models/input";
+import orango from "orango";
 
+const { EVENTS } = orango.consts;
 
-async function connectArangoDB(orango: any) {  // async functions return promises!
+async function connectArangoDB() {  // async functions return promises!
   try {
 
-    // Bind Model to orango instance
-    InputModel(orango);
-    const { EVENTS } = orango.consts
+    const orangoInstance = orango.get("dev");
 
-    orango.events.once(EVENTS.CONNECTED, conn => {
-      console.log('🥑  Connected to ArangoDB:', conn.url + '/' + conn.name);
+    // Bind Model to orango instance
+    InputModel(orangoInstance);
+
+    
+
+    orangoInstance.events.once(EVENTS.CONNECTED, conn => {
+      console.log('🥑  Connected to ArangoDB:', conn.url + '/_db/' + conn.name);
     });
-    orango.events.once(EVENTS.READY, () => {
+    orangoInstance.events.once(EVENTS.READY, () => {
       console.log('🍊  Models loaded, Orango is all good to go!');
     });
-    await orango.connect({
+    await orangoInstance.connect({
        url: 'http://localhost:8530',
        username: 'root', 
        password: '' 
     });
+    return orangoInstance;
+    
   } 
   catch (dbInitError){
     console.log(dbInitError);

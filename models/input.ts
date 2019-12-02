@@ -1,15 +1,21 @@
-const InputModel = orango => {
-    const schema = new orango.Schema({
+const InputModel = (orango:any) => {
+    const schema: any = new orango.Schema({
         zipcode: {type: String, required: true},
         timestamp: {type: Date, default: Date.now }
     });
-    const Input = orango.model('Input', schema);
-    Input.add = async ({zipcode}) => {
+
+    const Input:any = orango.model('Input', schema);
+
+    Input.add = async (zipcode) => {
+        console.log(zipcode);
         const newInput = new Input({zipcode});
         await newInput.validate(); 
         await newInput.save();
         return newInput;
     };
+
 };
-module.exports = InputModel;
+
+export{InputModel};
+
 
