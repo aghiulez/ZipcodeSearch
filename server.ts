@@ -15,8 +15,9 @@ const start: any = async (port: number) => {
     
     //makes JavaScript wait until that promise settles
     const orangoInstance = await connectArangoDB();    // -> orango object
-    const redisInstance  = await connectRedisCache();  // -> redis object
-    
+    //const redisInstance  = await connectRedisCache();  // -> redis object
+    const redisInstance = orangoInstance;   // temp
+
     const server = express();
 
     server.use("/", Router(orangoInstance, redisInstance));
