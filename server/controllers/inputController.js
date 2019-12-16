@@ -1,11 +1,12 @@
 //import * as cities from "cities";
+const cities = require("cities");
 
+const InputController = async (orango, redis, name, response) => {
 
-const InputController = async (orango, redis, body, response) => {
-
-    const myZipcode = body.zipcode;
-    //const myCity: string = cities.zip_lookup(myZipcode).city;
-    response.send('The zipcode you searched for is in ' + body.zipcode);
+    const myZipcode = name;
+    console.log(myZipcode);
+    const myCity = cities.zip_lookup(myZipcode).city;
+    response.send(JSON.stringify({ greeting: `${myCity}!` }));
 
     const InputModel = orango.model("Input");
 

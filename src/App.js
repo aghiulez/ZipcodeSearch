@@ -18,10 +18,10 @@ class App extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    // fetch(`/api/greeting?name=${encodeURIComponent(this.state.name)}`, {method: 'POST'})
-    //   .then(response => response.json())
-    //   .then(state => this.setState(state));
-    fetch(`/api/greeting?name=${encodeURIComponent(this.state.name)}`)
+    fetch(`/result`, {method: 'GET'})
+      // .then(response => response.json())
+      // .then(state => this.setState(state));
+    fetch(`/result?name=${encodeURIComponent(this.state.name)}`)
     .then(response => response.json())
     .then(state => this.setState(state));
   }
@@ -35,7 +35,7 @@ class App extends Component {
             <a class="active" href="#home">Home</a>
             <a href="#searches">Searches</a>
           </div>
-          <form  method="post" onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit}>
             <label htmlFor="name">Enter a zipcode: </label>
             <input
               id="name"

@@ -12,26 +12,23 @@ const Router = (orango, redis) => {
   const router = express.Router();
   router.use(express.urlencoded({extended: true}));
   
-  router.get('/', (request,response) => {
-    try{
-      console.log("hello1")
-      //response.sendFile(path.join(__dirname,'../pages','index.html'));
-      
-    }catch(error){
-      console.log(error);
-    }
-  })
+
   
-  router.get('/api/greeting', (req, res) => {
+  router.get('/result', (req, res) => {
     const name = req.query.name || 'World';
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify({ greeting: `Hello ${name}!` }));
+    InputController(orango,redis,name,res);
+    //res.setHeader('Content-Type', 'application/json');
+    //res.send(JSON.stringify({ greeting: `Hello ${name}!` }));
+    
   });
   
-  router.post('/', (request,response) => {
-    console.log("hello")
-    InputController(orango,redis,request.body,response);
-  })
+  // router.post('/result', (req,res) => {
+  //   // const name = req.query.name || 'World';
+  //   // res.setHeader('Content-Type', 'application/json');
+  //   // res.send(JSON.stringify({ greeting: `Hello ${name}!` }));
+  //   console.log(req.body);
+  //   InputController(orango,redis,req.body,res);
+  // })
   return router;
 }
 //export{Router}
