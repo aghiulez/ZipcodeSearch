@@ -1,32 +1,51 @@
 {
-  "name": "simple_server_ts",
-  "version": "1.0.0",
-  "description": "",
-  "main": "main.js",
-  "scripts": {
-    "start_dev": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "tsc": "tsc",
-    "dev": "ts-node-dev --respawn server.ts",
-    "prod": "tsc && node ./build/main.js"
-  },
-  "author": "Ara",
-  "license": "ISC",
+  "proxy": "http://localhost:3001",
+  "name": "zipcodesearch",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "@types/express": "^4.17.2",
-    "body-parser": "^1.19.0",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
     "cities": "^2.0.0",
-    "create-react-app": "^3.3.0",
-    "express": "^4.17.1",
-    "ioredis": "^4.14.1",
     "orango": "^1.0.0-beta-1.1",
     "react": "^16.12.0",
-    "redis": "^2.8.0",
-    "redis-commander": "^0.6.6",
-    "ts-node-dev": "^1.0.0-pre.44",
-    "typescript": "^3.7.2"
+    "react-dom": "^16.12.0",
+    "react-scripts": "3.3.0",
+    "redis": "^2.8.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "server": "node server",
+    "tsserver": "ts-node-dev --respawn server/server.ts",
+    "myserver": "nodemon server/server.js",
+    "dev": "run-p myserver start"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "devDependencies": {
-    "nodemon": "^2.0.1"
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-pino-logger": "^4.0.0",
+    "nodemon": "^2.0.2",
+    "npm-run-all": "^4.1.5",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.7.3"
   }
 }

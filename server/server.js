@@ -1,16 +1,18 @@
-import express from "express";
-
-
-import {Router} from "./routes/router";
-import {connectArangoDB} from "./connectors/connectArango";
-import {connectRedisCache} from "./connectors/connectRedis";
+//import express from "express";
+const express = require("express");
+const {Router} = require("./routes/router")
+//import {Router} from "./routes/router";
+const {connectArangoDB} = require("./connectors/connectArango");
+//import {connectArangoDB} from "./connectors/connectArango";
+//import {connectRedisCache} from "./connectors/connectRedis";
  
-const PORT: number = 3000;
-
+//const PORT: number = 3001;
+const PORT = 3001;
 
 // USE REDIS AS MIDDLEWARE
 
-const start: any = async (port: number) => {
+//const start: any = async (port: number) => {
+const start = async (port) => {
   try{
     
     //makes JavaScript wait until that promise settles

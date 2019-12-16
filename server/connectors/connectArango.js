@@ -1,5 +1,9 @@
-import {InputModel} from "../models/input";
-import orango from "orango";
+//import {InputModel} from "../models/input";
+//import orango from "orango";
+
+const {InputModel} = require("../models/input");
+const orango = require("orango")
+
 
 const { EVENTS } = orango.consts;
 
@@ -32,4 +36,4 @@ async function connectArangoDB() {  // async functions return promises!
   }
 }
 
-export{connectArangoDB};
+module.exports = {connectArangoDB};
