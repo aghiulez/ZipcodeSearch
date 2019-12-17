@@ -15,11 +15,8 @@ const Router = (orango, redis) => {
 
   
   router.get('/result', (req, res) => {
-    const name = req.query.name || 'World';
-    InputController(orango,redis,name,res);
-    //res.setHeader('Content-Type', 'application/json');
-    //res.send(JSON.stringify({ greeting: `Hello ${name}!` }));
-    
+    const zip = req.query.zip || null;
+    InputController(orango,redis,zip,res);
   });
   
   // router.post('/result', (req,res) => {

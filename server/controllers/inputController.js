@@ -3,14 +3,27 @@ const cities = require("cities");
 
 const InputController = async (orango, redis, name, response) => {
 
-    const myZipcode = name;
-    console.log(myZipcode);
-    const myCity = cities.zip_lookup(myZipcode).city;
-    response.send(JSON.stringify({ greeting: `${myCity}!` }));
+    const myZipcode = name || null;
+    //console.log("zipcode: " + myZipcode);
 
-    const InputModel = orango.model("Input");
+    if (myZipcode != null ){
 
-    InputModel.add(myZipcode);
+        try{
+            const myCity = cities.zip_lookup(myZipcode).city;
+            response.send(JSON.stringify({ city: `${myCity}!` }));
+        
+            const InputModel = orango.model("Input");
+            InputModel.add(myZipcode);
+        
+        }
+        catch(error){
+            response.send(JSON.stringify({ city: "Not a proper zipcode..." }));
+            console.log("Error: not a proper zipcode input")
+        }
+
+    }
+
+    
 
     
 

@@ -5,15 +5,15 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      greeting: ''
+      zip: '',
+      city: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
-    this.setState({ name: event.target.value });
+    this.setState({ zip: event.target.value });
   }
 
   handleSubmit(event) {
@@ -21,7 +21,7 @@ class App extends Component {
     fetch(`/result`, {method: 'GET'})
       // .then(response => response.json())
       // .then(state => this.setState(state));
-    fetch(`/result?name=${encodeURIComponent(this.state.name)}`)
+    fetch(`/result?zip=${encodeURIComponent(this.state.zip)}`)
     .then(response => response.json())
     .then(state => this.setState(state));
   }
@@ -36,17 +36,17 @@ class App extends Component {
             <a href="#searches">Searches</a>
           </div>
           <form onSubmit={this.handleSubmit}>
-            <label htmlFor="name">Enter a zipcode: </label>
+            <label htmlFor="zip">Enter a zipcode: </label>
             <input
-              id="name"
+              id="zip"
               type="text"
-              value={this.state.name}
+              value={this.state.zip}
               onChange={this.handleChange}
             />
             <button type="submit">Submit</button>
           </form>
 
-          <p>{this.state.greeting}</p>
+          <p>{this.state.city}</p>
 
         </header>
       </div>
