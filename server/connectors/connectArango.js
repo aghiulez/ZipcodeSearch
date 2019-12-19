@@ -35,7 +35,7 @@ async function connectArangoDB() {  // async functions return promises!
     
   } 
   catch (dbInitError){
-    console.log(process.env.DB_HOST)
+    //console.log(process.env.DB_HOST)
     console.log(dbInitError);
   }
 }
