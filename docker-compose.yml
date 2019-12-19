@@ -21,10 +21,25 @@ services:
             - "3001:3001"
         build:
             context: ./server/
+            dockerfile: Dockerfile
         environment: 
             - DB_HOST=http://arangodb-local:8529/
-        links:
-            - arangodb-local 
+        depends_on: 
+            - arangodb-local
+        networks:
+            - dev-local-network
+    client:
+        image: zip-client
+        container_name: zc
+        ports:
+            - "3000:3000"
+        build:
+            context: ./client/
+            dockerfile: Dockerfile
+        environment: 
+            - SERVER_HOST=http://server:3001/
+        depends_on: 
+            - server
         networks:
             - dev-local-network
         

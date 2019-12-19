@@ -18,9 +18,9 @@ class App extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    fetch(`/result`, {method: 'GET'})
-      // .then(response => response.json())
-      // .then(state => this.setState(state));
+    // fetch(`/result`, {method: 'GET'})
+    //   .then(response => response.json())
+    //   .then(state => this.setState(state));
     fetch(`/result?zip=${encodeURIComponent(this.state.zip)}`)
     .then(response => response.json())
     .then(state => this.setState(state));
