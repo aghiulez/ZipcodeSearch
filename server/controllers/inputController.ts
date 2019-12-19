@@ -1,5 +1,5 @@
-//import * as cities from "cities";
-const cities = require("cities");
+import * as cities from "cities";
+//const cities = require("cities");
 
 const InputController = async (orango, redis, name, response) => {
 

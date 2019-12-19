@@ -1,11 +1,9 @@
-//import express from "express";
-const express = require("express");
+import express from "express";
+
 const {Router} = require("./routes/router")
-//import {Router} from "./routes/router";
+
 const {connectArangoDB} = require("./connectors/connectArango");
-//import {connectArangoDB} from "./connectors/connectArango";
-//import {connectRedisCache} from "./connectors/connectRedis";
- 
+
 //const PORT: number = 3001;
 const PORT = 3001;
 

@@ -1,12 +1,6 @@
-//import * as cities from "cities";
-//import * as express from "express";
-//import * as path from "path";
 
-//import {InputController} from "../controllers/inputController"
-
-const express = require("express");
 const {InputController} = require("../controllers/inputController")
-
+const express = require("express");
 
 const Router = (orango, redis) => {
   const router = express.Router();
