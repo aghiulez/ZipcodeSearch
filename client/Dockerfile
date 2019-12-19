@@ -1,4 +1,8 @@
 
+# What is specified in the Dockerfile is a default. It and can be overridden by using the 
+# docker command which is what docker-compose does.
+
+
 # BASE IMAGE 
 FROM node:latest
 
