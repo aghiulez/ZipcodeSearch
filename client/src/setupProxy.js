@@ -1,5 +1,5 @@
 const proxy = require('http-proxy-middleware');
-require('dotenv').config();  // how tf do i get the .env from parent dir....????!!!
+require('dotenv').config();  
 
 
 
