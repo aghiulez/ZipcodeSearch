@@ -1,0 +1,49 @@
+version: '3'
+services:
+    ###################################
+    # ArangoDB
+    ###################################
+    arangodb-local:
+        image: arangodb:3.5
+        environment:
+        - ARANGO_NO_AUTH=1
+        volumes:
+        - ./data/arangodb:/var/lib/arangodb3
+        - ./data/arrangodb-apps:/var/lib/arangodb3-apps
+        ports:
+        - '8529:8529'
+        networks:
+        - dev-local-network
+    server:
+        image: zip-server
+        container_name: zs
+        ports: 
+            - "3001:3001"
+        build:
+            context: ./server/
+            dockerfile: Dockerfile
+        environment: 
+            - DB_HOST=http://arangodb-local:8529/
+        depends_on: 
+            - arangodb-local
+        networks:
+            - dev-local-network
+    client:
+        image: zip-client
+        container_name: zc
+        ports:
+            - "3000:3000"
+        build:
+            context: ./client/
+            dockerfile: Dockerfile
+        environment: 
+            - SERVER_HOST=http://server:3001/
+        depends_on: 
+            - server
+        networks:
+            - dev-local-network
+        
+
+networks:
+  dev-local-network:
+    driver: bridge

@@ -1,12 +1,12 @@
 {
-  "proxy": "http://localhost:3001",
   "name": "zipcodesearch",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
+    "@testing-library/user-event": "^7.2.0",
+    "dotenv": "^8.2.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.0"
@@ -15,11 +15,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "server": "node server",
-    "tsserver": "ts-node-dev --respawn server/server.ts",
-    "myserver": "nodemon server/server.js",
-    "dev": "run-p myserver start"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -37,6 +33,7 @@
     ]
   },
   "devDependencies": {
+    "http-proxy-middleware": "^0.20.0",
     "nodemon": "^2.0.2"
   }
 }
