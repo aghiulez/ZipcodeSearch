@@ -7,7 +7,7 @@ Simple web application that optimizes the use of Typescript, Docker, Redis, and 
 
 ### Run API and Client locally
 Run server -> localhost:3001
-> npm run server
+> npm run dev
 
 Run client -> localhost:3000
 > npm run start
