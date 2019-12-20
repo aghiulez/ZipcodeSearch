@@ -10,9 +10,9 @@ services:
         image: arangodb:3.5
         environment:
         - ARANGO_NO_AUTH=1
-        volumes:
-        - ./data/arangodb:/var/lib/arangodb3
-        - ./data/arrangodb-apps:/var/lib/arangodb3-apps
+        volumes: # PERSISTENT DATA
+        - ./data/arangodb:/var/lib/arangodb3            # database directory to store the collection data
+        - ./data/arrangodb-apps:/var/lib/arangodb3-apps # apps directory to store any extensions
         ports:
         - '8529:8529'
         networks:
@@ -27,6 +27,8 @@ services:
             dockerfile: Dockerfile
         environment: 
             - DB_HOST=http://arangodb-local:8529/
+        volumes: # PERSISTENT DATA       
+            - ./api/node_modules:/app/api/node_modules
         depends_on: 
             - arangodb-local
         networks:
@@ -41,6 +43,8 @@ services:
             dockerfile: Dockerfile
         environment: 
             - SERVER_HOST=http://server:3001/
+        volumes: # PERSISTENT DATA       
+            - ./client/node_modules:/app/client/node_modules
         depends_on: 
             - server
         networks:

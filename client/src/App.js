@@ -31,10 +31,6 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
 
-        <div class="topnav">
-            <a class="active" href="#home">Home</a>
-            <a href="#searches">Searches</a>
-          </div>
           <form onSubmit={this.handleSubmit}>
             <label htmlFor="zip">Enter a zipcode: </label>
             <input

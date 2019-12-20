@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+
     "server": "nodemon server.js",
 
+    "start": "ts-node-dev --respawn server.ts",
     "dev": "ts-node-dev --respawn server.ts"
   },
   "author": "",
