@@ -11,7 +11,7 @@ FROM node:latest
 # all subsequent actions should be taken from the directory /usr/src/app in your 
 # image filesystem (never the host’s filesystem).
 #WORKDIR /usr/src/app
-WORKDIR /client/ 
+WORKDIR /app/client/ 
 
 
 # COPY the file package.json from your host to the present location (.) 
