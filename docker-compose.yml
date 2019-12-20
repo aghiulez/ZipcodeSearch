@@ -23,7 +23,7 @@ services:
         ports: 
             - "3001:3001"
         build:
-            context: ./server/
+            context: ./api/
             dockerfile: Dockerfile
         environment: 
             - DB_HOST=http://arangodb-local:8529/
