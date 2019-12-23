@@ -32,7 +32,7 @@ class App extends Component {
         <header className="App-header">
 
           <form onSubmit={this.handleSubmit}>
-            <label htmlFor="zip">Enter a zipcode: </label>
+            <label htmlFor="zip">Enter A zipcode: </label>
             <input
               id="zip"
               type="text"
