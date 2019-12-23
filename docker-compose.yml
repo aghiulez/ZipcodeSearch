@@ -20,8 +20,7 @@ services:
     server:
         image: zip-server
         container_name: zs
-        ports: 
-            - "3001:3001"
+ch
         build:
             context: ./api/
             dockerfile: Dockerfile
